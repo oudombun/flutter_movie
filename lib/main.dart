@@ -23,8 +23,7 @@ class _MyAppState extends State<MyApp> {
   List<Movie> _favoriteList= [];
 
   void _toggleFavorite(String movieId){
-    print(movieId);
-    final existingIndex = DUMMY_MOVIE.indexWhere((movie){movie.id == movieId;});
+    final existingIndex = _favoriteList.indexWhere((movie)=>movie.id == movieId);
     if(existingIndex>=0){
      setState(() {
        _favoriteList.removeAt(existingIndex);
@@ -37,7 +36,8 @@ class _MyAppState extends State<MyApp> {
   }
 
   bool isMyFavorite(String movieId){
-      return DUMMY_MOVIE.any((element) => element.id==movieId);
+    print(_favoriteList.any((element) => element.id==movieId));
+      return _favoriteList.any((element) => element.id==movieId);
   }
 
 
@@ -50,7 +50,7 @@ class _MyAppState extends State<MyApp> {
         "/":(ctx)=>BottomNavScreen(_favoriteList),
         MovieCategoryScreen.routeName:(ctx)=>MovieCategoryScreen(),
         MovieDetailScreen.routeName:(ctx)=>MovieDetailScreen(_toggleFavorite,isMyFavorite),
-        FilterScreen.routeName:(ctx)=>FilterScreen(),
+        FilterScreen.routeName:(ctx)=>FilterScreen(_favoriteList),
       },
       onUnknownRoute:(settings){
         return MaterialPageRoute(builder: (ctx)=>BottomNavScreen(_favoriteList));

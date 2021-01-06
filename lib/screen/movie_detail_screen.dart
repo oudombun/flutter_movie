@@ -8,6 +8,7 @@ class MovieDetailScreen extends StatelessWidget {
   final Function isMyFavorite;
   MovieDetailScreen(this.toggleFavorite,this.isMyFavorite);
 
+
   @override
   Widget build(BuildContext context) {
     final routeArgs = ModalRoute.of(context).settings.arguments as Map<String,Object>;
